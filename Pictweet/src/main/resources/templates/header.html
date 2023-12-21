@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="meta_header(title,links,scripts)">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Pictweet</title>
+</head>
+
+<body>
+	<header class="header" th:fragment="header">
+		<div class="header_bar row">
+			<h1 class="grid-6"><a href="/">Pictweet</a></h1>
+			<!-- ユーザーがログイン成功した場合 -->
+			<!--後ほど記述 -->
+			<!-- ログインしていない場合 -->
+			<div class="grid-6">
+				<a class="post" href="login.html">ログイン</a>
+				<a class="post" href="registar.html">新規登録</a>
+			</div>
+		</div>
+	</header>
+	<footer>
+
+		<p>
+			Copyright Pictweet 2023.
+		</p>
+	</footer>
+</body>
+
+</html>

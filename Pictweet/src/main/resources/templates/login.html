@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="header :: meta_header('top',~{::link},~{::script})">
+</head>
+
+<body>
+	<div th:replace="~{header :: header}"></div>
+	<div class="contents row">
+		<div class="container">
+			<h2>Sign in</h2>
+			<form action="login" class="new_user">
+				<div class="field">
+					<label>LoginID</label>
+					<input type="text" placeholder="Ligin123">
+				</div>
+
+				<div class="field">
+					<label>Password</label>
+					<input type="password" maxlength="10">
+				</div>
+
+				<div class="actions">
+					<input type="submit" value="ログイン">
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>
