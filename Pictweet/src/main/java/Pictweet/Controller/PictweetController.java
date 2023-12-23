@@ -5,8 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PictweetController {
-	@GetMapping("")
+	@GetMapping("/")
 	public String login() {
 		return "login";
+	}
+	
+	@GetMapping("/registration")
+	public String registration() {
+		return "registration";
 	}
 }

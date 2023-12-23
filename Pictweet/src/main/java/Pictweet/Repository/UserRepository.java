@@ -9,5 +9,5 @@ import Pictweet.Entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity,String> {
 	//新規登録のメソッドはすでにあるため記述不要
 	//ログイン時の処理
-	public UserEntity findByID(String loginId);
+	
 }
