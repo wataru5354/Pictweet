@@ -10,6 +10,9 @@
 		<div class="container">
 			<h2>Sign in</h2>
 			<form action="login" class="new_user">
+				<div th:if="${message != null}">
+					<p th:text="${message}"></p>
+				</div>
 				<div class="field">
 					<label>LoginID</label>
 					<input type="text" id="loginId" name="loginId" placeholder="Ligin123">
