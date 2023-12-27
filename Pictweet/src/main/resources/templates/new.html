@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="common/style.css">
-    <title>Pictweet</title>
-  </head>
-  <body>
-    <div class="contents row">
-      <div class="container">
-        <h3>投稿する</h3>
-        <form>
-          <textarea placeholder="ここに投稿したい内容を記載してね" rows="10"></textarea>
-          <input type="submit" value="投稿する">
-        </form>
-      </div>
-    </div>
-  </body>
+
+<head th:replace="header :: meta_header('top',~{::link},~{::script})">
+</head>
+
+<body>
+	<div class="contents row">
+		<div class="container">
+			<h3>投稿する</h3>
+			<form action="newTweet" method="post">
+				<textarea placeholder="ここに投稿したい内容を記載してね" rows="10" id="tweet" name="tweet"></textarea>
+				<input type="hidden"
+				id="loginId"
+				name="loginId"
+				th:field="${loginUser.loginId}">
+				<input type="submit" value="投稿する">
+			</form>
+		</div>
+	</div>
+</body>
+
 </html>

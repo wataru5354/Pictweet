@@ -20,7 +20,7 @@ public class PictweetController {
 	
 	
 	@GetMapping("/")
-	public String login() {
+	public String loginPage() {
 		return "login";
 	}
 	
@@ -29,8 +29,15 @@ public class PictweetController {
 	 * @return
 	 */
 	@GetMapping("registration")
-	public String registration() {
+	public String registrationPage() {
 		return "registration";
+	}
+	/*
+	 * 新規投稿画面への遷移
+	 */
+	@GetMapping("new")
+	public String newTweetPage() {
+		return "new";
 	}
 	
 	@PostMapping("userRegistration")
@@ -57,6 +64,9 @@ public class PictweetController {
 		}
 	}
 	
+	/*
+	 * ログイン制御
+	 */
 	@PostMapping("userLogin")
 	public String userLogin(@ModelAttribute LoginForm loginForm,
 			Model model) {
