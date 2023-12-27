@@ -11,4 +11,6 @@ public interface UserRepository extends JpaRepository<UserEntity,String> {
 	//ログイン時の処理
 	//ログイン時に必要なログイン情報を取得
 	public UserEntity findByLoginId(String loginId);
+	//投稿または編集、削除する際にUserIDを取得
+	public UserEntity findByUserId(Integer userId);
 }

@@ -9,4 +9,6 @@ public interface UserService {
 	public void createUser(UserRegistrationForm userRegistrationForm);
 	//ログイン時の処理
 	public UserEntity loginUser(LoginForm loginForm);
+	//UserID取得メソッド
+	public UserEntity findByUserId(Integer userId);
 }

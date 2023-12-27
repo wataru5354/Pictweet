@@ -11,9 +11,9 @@
 			<form action="newTweet" method="post">
 				<textarea placeholder="ここに投稿したい内容を記載してね" rows="10" id="tweet" name="tweet"></textarea>
 				<input type="hidden"
-				id="loginId"
-				name="loginId"
-				th:field="${loginUser.loginId}">
+				id="userId"
+				name="userId"
+				th:field="${loginUser.userId}">
 				<input type="submit" value="投稿する">
 			</form>
 		</div>

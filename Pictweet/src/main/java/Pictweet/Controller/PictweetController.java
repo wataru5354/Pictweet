@@ -5,11 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import Pictweet.Entity.UserEntity;
 import Pictweet.Form.LoginForm;
+import Pictweet.Form.TweetForm;
 import Pictweet.Form.UserRegistrationForm;
+import Pictweet.Service.TweetService;
 import Pictweet.Service.UserService;
 
 @Controller
@@ -17,6 +20,8 @@ public class PictweetController {
 	
 	@Autowired
 	UserService userService;
+	@Autowired
+	TweetService tweetService;
 	
 	
 	@GetMapping("/")
@@ -35,8 +40,11 @@ public class PictweetController {
 	/*
 	 * 新規投稿画面への遷移
 	 */
-	@GetMapping("new")
-	public String newTweetPage() {
+	@GetMapping("tweet/{userId}")
+	public String newTweetPage(@PathVariable("userId") Integer userId, 
+			Model model) {
+		UserEntity loginUser = userService.findByUserId(userId);
+		model.addAttribute("loginUser",loginUser);
 		return "new";
 	}
 	
@@ -83,5 +91,10 @@ public class PictweetController {
 		
 	}
 	
-	
+	//新規投稿
+	@PostMapping("tweet/newTweet")
+	public String newTweet(@ModelAttribute TweetForm tweetForm) {
+		tweetService.createTweet(tweetForm);
+		return "/create";
+	}
 }

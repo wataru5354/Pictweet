@@ -3,7 +3,7 @@
 
 <head th:fragment="meta_header(title,links,scripts)">
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<title>Pictweet</title>
 </head>
 
@@ -21,7 +21,7 @@
 						</li>
 					</ul>
 				</span>
-				<a class="post" th:href="new">投稿する</a>
+				<a class="post" th:href="@{tweet/{userId}(userId=${loginUser.userId})}">投稿する</a>
 			</div>
 			<!--後ほど記述 -->
 			<!-- ログインしていない場合 -->

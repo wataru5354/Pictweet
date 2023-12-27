@@ -36,4 +36,10 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 	}
+	
+	public UserEntity findByUserId(Integer userId){
+		UserEntity user = userRepository.findByUserId(userId);
+		return user;
+	}
+	
 }
