@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import Pictweet.Entity.UserEntity;
+import Pictweet.Form.LoginForm;
 import Pictweet.Form.UserRegistrationForm;
 import Pictweet.Service.UserService;
 
@@ -54,4 +56,22 @@ public class PictweetController {
 			return "registration";
 		}
 	}
+	
+	@PostMapping("userLogin")
+	public String userLogin(@ModelAttribute LoginForm loginForm,
+			Model model) {
+		UserEntity loginUser =  userService.loginUser(loginForm);
+		String message = "";
+		if(loginUser != null) {
+			model.addAttribute("loginUser",loginUser);
+			return "index";
+		}else {
+			message = "ログインに失敗しました。";
+			model.addAttribute("message",message);
+			return "login";
+		}
+		
+	}
+	
+	
 }

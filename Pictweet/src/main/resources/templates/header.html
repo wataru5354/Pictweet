@@ -9,12 +9,23 @@
 
 <body>
 	<header class="header" th:fragment="header">
-		<div class="header_bar row">
+		<div class="header__bar row" th:Object="${loginUser}">
 			<h1 class="grid-6"><a href="/">Pictweet</a></h1>
 			<!-- ユーザーがログイン成功した場合 -->
+			<div class="user_nav grid-6" th:if="${loginUser != null}">
+				<span><label th:text="${loginUser.nickname}"></label>
+					<ul class="user__info">
+						<li>
+							<a href="/">マイページ</a>
+							<a th:href="logout">ログアウト</a>
+						</li>
+					</ul>
+				</span>
+				<a class="post" href="/">投稿する</a>
+			</div>
 			<!--後ほど記述 -->
 			<!-- ログインしていない場合 -->
-			<div class="grid-6">
+			<div class="grid-6" th:if="${loginUser == null}">
 				<a class="post" href="login.html">ログイン</a>
 				<a class="post" th:href="registration">新規登録</a>
 			</div>
