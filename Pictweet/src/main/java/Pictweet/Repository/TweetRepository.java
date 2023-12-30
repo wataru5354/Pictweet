@@ -7,5 +7,4 @@ import Pictweet.Entity.TweetEntity;
 
 @Repository
 public interface TweetRepository extends JpaRepository<TweetEntity,Integer> {
-
 }

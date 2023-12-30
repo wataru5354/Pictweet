@@ -1,5 +1,7 @@
 package Pictweet.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import Pictweet.Entity.TweetEntity;
 import Pictweet.Entity.UserEntity;
 import Pictweet.Form.LoginForm;
 import Pictweet.Form.TweetForm;
@@ -27,6 +30,11 @@ public class PictweetController {
 	@GetMapping("/")
 	public String loginPage() {
 		return "login";
+	}
+	
+	@GetMapping("/index")
+	public String index() {
+		return "index";
 	}
 	
 	/**
@@ -82,6 +90,8 @@ public class PictweetController {
 		String message = "";
 		if(loginUser != null) {
 			model.addAttribute("loginUser",loginUser);
+			List<TweetEntity> tweets = tweetService.findAll();
+			model.addAttribute("tweets",tweets);
 			return "index";
 		}else {
 			message = "ログインに失敗しました。";
