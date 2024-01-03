@@ -32,4 +32,20 @@ public class TweetServiceImpl implements TweetService {
 		tweet.setUser(tweetUser);
 		tweetRepository.save(tweet);
 	}
+	
+	//投稿情報取得メソッド
+	public TweetEntity edit(Integer id) {
+		TweetEntity edit = tweetRepository.getById(id);
+		return edit; 
+	}
+	
+	//編集メソッド
+	public void editTweet(TweetForm tweetForm) {
+		TweetEntity editTweet = new TweetEntity();
+		UserEntity tweetUser = userRepository.findByUserId(tweetForm.getUserId());
+		editTweet.setId(tweetForm.getId());
+		editTweet.setTweet(tweetForm.getTweet());
+		editTweet.setUser(tweetUser);
+		tweetRepository.save(editTweet);
+	}
 }

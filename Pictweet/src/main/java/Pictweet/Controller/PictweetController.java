@@ -56,6 +56,19 @@ public class PictweetController {
 		return "new";
 	}
 	
+	/*
+	 * 編集画面への遷移
+	 */
+	@GetMapping("edit/{id}")
+	public String edit(@PathVariable("id") Integer id,
+			Model model) {
+		TweetEntity edit =tweetService.edit(id);
+		UserEntity editUser = edit.getUser();
+		model.addAttribute("edit",edit);
+		model.addAttribute("editUser",editUser);
+		return "edit";
+	}
+	
 	@PostMapping("userRegistration")
 	/**
 	 * 新規登録の処理
@@ -106,5 +119,12 @@ public class PictweetController {
 	public String newTweet(@ModelAttribute TweetForm tweetForm) {
 		tweetService.createTweet(tweetForm);
 		return "/create";
+	}
+	
+	//編集
+	@PostMapping("edit/editTweet")
+	public String editTweet(@ModelAttribute TweetForm tweetForm) {
+		tweetService.editTweet(tweetForm);
+		return "/update";
 	}
 }

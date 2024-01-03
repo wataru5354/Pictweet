@@ -11,7 +11,9 @@ public interface TweetService {
 	
 	//新規投稿のためのメソッド
 	public void createTweet(TweetForm tweetForm);
-	//編集用のメソッドも後で用意
 	
+	//編集用のメソッド
+	public TweetEntity edit(Integer id);
 	
+	public void editTweet(TweetForm tweetForm);
 }
