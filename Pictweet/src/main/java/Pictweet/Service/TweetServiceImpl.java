@@ -34,9 +34,9 @@ public class TweetServiceImpl implements TweetService {
 	}
 	
 	//投稿情報取得メソッド
-	public TweetEntity edit(Integer id) {
-		TweetEntity edit = tweetRepository.getById(id);
-		return edit; 
+	public TweetEntity findTweet(Integer id) {
+		TweetEntity findTweet = tweetRepository.getById(id);
+		return findTweet; 
 	}
 	
 	//編集メソッド

@@ -13,7 +13,7 @@ public interface TweetService {
 	public void createTweet(TweetForm tweetForm);
 	
 	//編集用のメソッド
-	public TweetEntity edit(Integer id);
+	public TweetEntity findTweet(Integer id);
 	
 	public void editTweet(TweetForm tweetForm);
 }

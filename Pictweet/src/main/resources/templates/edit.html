@@ -5,19 +5,19 @@
 </head>
 
 <body>
-	<div class="contents row" th:object="${edit}">
+	<div class="contents row" th:object="${findTweet}">
 		<div class="container">
 			<h3>編集する</h3>
 			<form action="editTweet" method="post">
 				<input type="hidden"
 				id="id"
 				name="id"
-				th:field="${edit.id}">
-				<textarea rows="10" th:text="${edit.tweet}"　id="tweet" name="tweet"></textarea>
+				th:field="${findTweet.id}">
+				<textarea rows="10" th:text="${findTweet.tweet}"　id="tweet" name="tweet"></textarea>
 				<input type="hidden"
 				id="userId"
 				name="userId"
-				th:field="${editUser.userId}">
+				th:field="${tweetUser.userId}">
 				<input type="submit" value="更新する">
 			</form>
 		</div>

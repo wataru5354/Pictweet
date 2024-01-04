@@ -59,14 +59,23 @@ public class PictweetController {
 	/*
 	 * 編集画面への遷移
 	 */
-	@GetMapping("edit/{id}")
+	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id,
 			Model model) {
-		TweetEntity edit =tweetService.edit(id);
-		UserEntity editUser = edit.getUser();
-		model.addAttribute("edit",edit);
-		model.addAttribute("editUser",editUser);
+		TweetEntity findTweet =tweetService.findTweet(id);
+		UserEntity tweetUser = findTweet.getUser();
+		model.addAttribute("findTweet",findTweet);
+		model.addAttribute("tweetUser",tweetUser);
 		return "edit";
+	}
+	
+	@GetMapping("/show/{id}")
+	public String show(@PathVariable("id") Integer id,
+			Model model) {
+		TweetEntity showTweet = tweetService.findTweet(id);
+		UserEntity tweetUser = showTweet.getUser();
+		model.addAttribute("showTweet",showTweet);
+		return "show";
 	}
 	
 	@PostMapping("userRegistration")
