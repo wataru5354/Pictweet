@@ -48,4 +48,10 @@ public class TweetServiceImpl implements TweetService {
 		editTweet.setUser(tweetUser);
 		tweetRepository.save(editTweet);
 	}
+	
+	//削除メソッド
+	public void deleteTweet(Integer id) {
+		TweetEntity deleteTweet = tweetRepository.getById(id);
+		tweetRepository.delete(deleteTweet);
+	}
 }

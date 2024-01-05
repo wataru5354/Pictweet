@@ -69,14 +69,23 @@ public class PictweetController {
 		return "edit";
 	}
 	
+	/*
+	 * 詳細画面への遷移処理
+	 */
 	@GetMapping("/show/{id}")
 	public String show(@PathVariable("id") Integer id,
 			Model model) {
 		TweetEntity showTweet = tweetService.findTweet(id);
-		UserEntity tweetUser = showTweet.getUser();
 		model.addAttribute("showTweet",showTweet);
 		return "show";
 	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteTweet(@PathVariable("id") Integer id) {
+		tweetService.deleteTweet(id);
+		return "destroy";
+	}
+	
 	
 	@PostMapping("userRegistration")
 	/**
