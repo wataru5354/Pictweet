@@ -37,7 +37,6 @@ public class PictweetController {
 		if(loginUser != null) {
 			List<TweetEntity> tweets = tweetService.findAll();
 			model.addAttribute("tweets", tweets);
-			session.setAttribute("loginUser", loginUser);
 			model.addAttribute("loginUser",loginUser);
 			return "index";
 		}
@@ -88,10 +87,29 @@ public class PictweetController {
 		return "show";
 	}
 
+	//削除処理
 	@GetMapping("/delete/{id}")
 	public String deleteTweet(@PathVariable("id") Integer id) {
 		tweetService.deleteTweet(id);
 		return "destroy";
+	}
+	
+	//ログアウト処理
+	@GetMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "login";
+	}
+	
+	//マイページ表示機能
+	@GetMapping("mypage/{userId}")
+	public String Myindex(@PathVariable("userId") Integer userId, Model model) {
+		UserEntity loginUser = (UserEntity)session.getAttribute("loginUser");
+		UserEntity user = userService.findByUserId(userId);
+		List<TweetEntity> myTweets = tweetService.findByUser(user);
+		model.addAttribute("tweets",myTweets);
+		model.addAttribute("loginUser",loginUser);
+		return "index";
 	}
 
 	@PostMapping("userRegistration")

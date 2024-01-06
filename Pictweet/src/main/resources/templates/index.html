@@ -9,7 +9,7 @@
 	<div class="contents row">
 		<div class="content_post" th:each="tweet : ${tweets}">
 			<div class="more">
-				<span><img src="arrow_top.png" alt="サンプル画像"></span>
+				<span><img src="/arrow_top.png" alt="サンプル画像"></span>
 				<ul class="more_list">
 					<li>
 						<a th:href="@{show/{id}(id=${tweet.id})}">詳細</a>

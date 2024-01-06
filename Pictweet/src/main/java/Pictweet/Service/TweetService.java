@@ -3,6 +3,7 @@ package Pictweet.Service;
 import java.util.List;
 
 import Pictweet.Entity.TweetEntity;
+import Pictweet.Entity.UserEntity;
 import Pictweet.Form.TweetForm;
 
 public interface TweetService {
@@ -20,4 +21,7 @@ public interface TweetService {
 	
 	//削除メソッド
 	public void deleteTweet(Integer id);
+	
+	//マイページ取得
+	public List<TweetEntity> findByUser(UserEntity user);
 }

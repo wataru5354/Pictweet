@@ -54,4 +54,9 @@ public class TweetServiceImpl implements TweetService {
 		TweetEntity deleteTweet = tweetRepository.getById(id);
 		tweetRepository.delete(deleteTweet);
 	}
+	
+	//マイページ一覧表示メソッド
+	public List<TweetEntity> findByUser(UserEntity user){
+		return tweetRepository.findByUser(user);
+	}
 }

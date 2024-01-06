@@ -16,8 +16,8 @@
 				<span><label th:text="${loginUser.nickname}"></label>
 					<ul class="user__info">
 						<li>
-							<a href="/">マイページ</a>
-							<a th:href="logout">ログアウト</a>
+							<a th:href="@{/mypage/{userId}(userId=${loginUser.userId})}">マイページ</a>
+							<a th:href="/logout">ログアウト</a>
 						</li>
 					</ul>
 				</span>
@@ -26,7 +26,7 @@
 			<!--後ほど記述 -->
 			<!-- ログインしていない場合 -->
 			<div class="grid-6" th:if="${loginUser == null}">
-				<a class="post" href="login.html">ログイン</a>
+				<a class="post" th:href="login">ログイン</a>
 				<a class="post" th:href="registration">新規登録</a>
 			</div>
 		</div>
