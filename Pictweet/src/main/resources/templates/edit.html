@@ -8,7 +8,12 @@
 	<div class="contents row" th:object="${findTweet}">
 		<div class="container">
 			<h3>編集する</h3>
-			<form action="editTweet" method="post">
+			<form action="editTweet" method="post" enctype="multipart/form-data">
+				<input type="file" id="file" name="file">
+				<input type="hidden"
+				id="imageId"
+				name="imageId"
+				th:field ="${findTweet.image.imageId}">
 				<input type="hidden"
 				id="id"
 				name="id"

@@ -7,4 +7,5 @@ public class TweetForm {
 	private int id;
 	private String tweet;
 	private int userId; 
+	private int imageId;
 }

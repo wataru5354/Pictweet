@@ -31,12 +31,10 @@ public class TweetServiceImpl implements TweetService {
 	public List<TweetEntity> findAll() {
 		return tweetRepository.findAll();
 	}
+
 	//新規投稿メソッド
 	public void createTweet(TweetForm tweetForm, MultipartFile multipartFile) throws IOException {
-		String imageName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-		byte[] bytes = multipartFile.getBytes();
-		String imageByte = Base64.getEncoder().encodeToString(bytes);
-		ImageEntity image = new ImageEntity(imageName,multipartFile.getContentType(),imageByte);
+		ImageEntity image = commonImage(multipartFile);
 		imageRepository.save(image);
 		TweetEntity tweet = new TweetEntity();
 		UserEntity tweetUser = userRepository.findByUserId(tweetForm.getUserId());
@@ -45,23 +43,32 @@ public class TweetServiceImpl implements TweetService {
 		tweet.setImage(image);
 		tweetRepository.save(tweet);
 	}
-	
+
 	//投稿情報取得メソッド
 	public TweetEntity findTweet(Integer id) {
 		TweetEntity findTweet = tweetRepository.getById(id);
-		return findTweet; 
+		return findTweet;
 	}
-	
+
 	//編集メソッド
-	public void editTweet(TweetForm tweetForm) {
+	public void editTweet(TweetForm tweetForm, MultipartFile multipartFile) throws IOException {
 		TweetEntity editTweet = new TweetEntity();
 		UserEntity tweetUser = userRepository.findByUserId(tweetForm.getUserId());
+		ImageEntity image = imageRepository.findByImageId(tweetForm.getImageId());
+		image =  commonImage(multipartFile);
+		image.setImageId(tweetForm.getImageId());
+		image.setImage(image.getImage());
+		image.setImageName(image.getImageName());
+		image.setType(image.getType());
+		imageRepository.save(image);
 		editTweet.setId(tweetForm.getId());
 		editTweet.setTweet(tweetForm.getTweet());
 		editTweet.setUser(tweetUser);
+		editTweet.setImage(image);
 		tweetRepository.save(editTweet);
+		
 	}
-	
+
 	//削除メソッド
 	public void deleteTweet(Integer id) {
 		TweetEntity deleteTweet = tweetRepository.getById(id);
@@ -69,9 +76,18 @@ public class TweetServiceImpl implements TweetService {
 		tweetRepository.delete(deleteTweet);
 		imageRepository.delete(deleteImage);
 	}
-	
+
 	//マイページ一覧表示メソッド
-	public List<TweetEntity> findByUser(UserEntity user){
+	public List<TweetEntity> findByUser(UserEntity user) {
 		return tweetRepository.findByUser(user);
+	}
+
+	//画像共通処理
+	public ImageEntity commonImage(MultipartFile multipartFile) throws IOException {
+		String imageName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		byte[] bytes = multipartFile.getBytes();
+		String imageByte = Base64.getEncoder().encodeToString(bytes);
+		ImageEntity image = new ImageEntity(imageName, multipartFile.getContentType(), imageByte);
+		return image;
 	}
 }

@@ -177,8 +177,8 @@ public class PictweetController {
 
 	//編集
 	@PostMapping("edit/editTweet")
-	public String editTweet(@ModelAttribute TweetForm tweetForm) {
-		tweetService.editTweet(tweetForm);
+	public String editTweet(@ModelAttribute TweetForm tweetForm,@RequestParam("file") MultipartFile multipartFile)throws IOException {
+		tweetService.editTweet(tweetForm,multipartFile);
 		return "/update";
 	}
 }
