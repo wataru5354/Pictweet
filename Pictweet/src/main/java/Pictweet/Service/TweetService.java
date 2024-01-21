@@ -1,6 +1,9 @@
 package Pictweet.Service;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import Pictweet.Entity.TweetEntity;
 import Pictweet.Entity.UserEntity;
@@ -11,7 +14,7 @@ public interface TweetService {
 	public List<TweetEntity> findAll();
 	
 	//新規投稿のためのメソッド
-	public void createTweet(TweetForm tweetForm);
+	public void createTweet(TweetForm tweetForm,MultipartFile multipartFile) throws IOException;
 	
 	//個別情報取得メソッド
 	public TweetEntity findTweet(Integer id);

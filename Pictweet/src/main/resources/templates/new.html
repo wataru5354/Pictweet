@@ -8,7 +8,8 @@
 	<div class="contents row">
 		<div class="container">
 			<h3>投稿する</h3>
-			<form action="newTweet" method="post">
+			<form action="newTweet" method="post" enctype="multipart/form-data">
+				<input type="file" id="file" name="file">
 				<textarea placeholder="ここに投稿したい内容を記載してね" rows="10" id="tweet" name="tweet"></textarea>
 				<input type="hidden"
 				id="userId"

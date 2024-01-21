@@ -17,11 +17,11 @@
 					<ul class="user__info">
 						<li>
 							<a th:href="@{/mypage/{userId}(userId=${loginUser.userId})}">マイページ</a>
-							<a th:href="/logout">ログアウト</a>
+							<a th:href="logout">ログアウト</a>
 						</li>
 					</ul>
 				</span>
-				<a class="post" th:href="@{tweet/{userId}(userId=${loginUser.userId})}">投稿する</a>
+				<a class="post" th:href="@{/tweet/{userId}(userId=${loginUser.userId})}">投稿する</a>
 			</div>
 			<!--後ほど記述 -->
 			<!-- ログインしていない場合 -->

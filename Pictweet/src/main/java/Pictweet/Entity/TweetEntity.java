@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -25,5 +26,9 @@ public class TweetEntity {
 	@ManyToOne
 	@JoinColumn(name="user_id",referencedColumnName="user_id")
 	private UserEntity user;
+	
+	@OneToOne
+	@JoinColumn(name="image_id",referencedColumnName="image_id")
+	private ImageEntity image;
 	
 }

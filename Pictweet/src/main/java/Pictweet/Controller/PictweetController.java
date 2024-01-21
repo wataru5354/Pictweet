@@ -1,5 +1,6 @@
 package Pictweet.Controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import Pictweet.Entity.ImageEntity;
 import Pictweet.Entity.TweetEntity;
 import Pictweet.Entity.UserEntity;
 import Pictweet.Form.LoginForm;
 import Pictweet.Form.TweetForm;
 import Pictweet.Form.UserRegistrationForm;
+import Pictweet.Service.ImageService;
 import Pictweet.Service.TweetService;
 import Pictweet.Service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +33,8 @@ public class PictweetController {
 	UserService userService;
 	@Autowired
 	TweetService tweetService;
+	@Autowired
+	ImageService imageService;
 	@Autowired
 	HttpSession session;
 
@@ -55,7 +62,7 @@ public class PictweetController {
 	/*
 	 * 新規投稿画面への遷移
 	 */
-	@GetMapping("tweet/{userId}")
+	@GetMapping("/tweet/{userId}")
 	public String newTweetPage(@PathVariable("userId") Integer userId,
 			Model model) {
 		UserEntity loginUser = userService.findByUserId(userId);
@@ -82,8 +89,11 @@ public class PictweetController {
 	@GetMapping("/show/{id}")
 	public String show(@PathVariable("id") Integer id,
 			Model model) {
+		UserEntity loginUser =(UserEntity)session.getAttribute("loginUser");
 		TweetEntity showTweet = tweetService.findTweet(id);
+		ImageEntity tweetImage = showTweet.getImage();
 		model.addAttribute("showTweet", showTweet);
+		model.addAttribute("loginUser",loginUser);
 		return "show";
 	}
 
@@ -160,8 +170,8 @@ public class PictweetController {
 
 	//新規投稿
 	@PostMapping("tweet/newTweet")
-	public String newTweet(@ModelAttribute TweetForm tweetForm) {
-		tweetService.createTweet(tweetForm);
+	public String newTweet(@ModelAttribute TweetForm tweetForm,@RequestParam("file") MultipartFile multipartFile) throws IOException {
+		tweetService.createTweet(tweetForm,multipartFile);
 		return "/create";
 	}
 

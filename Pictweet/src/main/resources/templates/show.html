@@ -5,8 +5,9 @@
 </head>
 
 <body>
+	<div th:replace="~{header :: header}"></div>
 	<div class="contents row" ty:object="${showTweet}">
-		<div class="content_post">
+		<div class="content_post"><img th:src="*{'data:image/jpeg;base64,' + {showTweet.image.image}}" th:alt="${showTweet.image.imageName}">
 			<div class="more">
 				<span><img src="/arrow_top.png" alt="サンプル画像"></span>
 				<ul class="more_list">

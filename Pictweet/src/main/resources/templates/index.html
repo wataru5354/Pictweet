@@ -6,8 +6,8 @@
 
 <body>
 	<div th:replace="~{header :: header}"></div>
-	<div class="contents row">
-		<div class="content_post" th:each="tweet : ${tweets}">
+	<div class="contents row" 　th:each="tweet : ${tweets}">
+		<div class="content_post"><img th:src="*{'data:iamge/jpeg;base64,' + {tweet.image.image}}" th:alt="${tweet.image.imageName}">
 			<div class="more">
 				<span><img src="/arrow_top.png" alt="サンプル画像"></span>
 				<ul class="more_list">
@@ -23,8 +23,8 @@
 				</ul>
 			</div>
 			<p th:text="${tweet.tweet}"></p>
-			
-			<span>
+
+			<span class="name">
 				<a href="">
 					投稿者：<span th:text="${tweet.user.nickname}"></span>
 				</a>
