@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -129,18 +131,23 @@ public class PictweetController {
 	 * @param model
 	 * @return
 	 */
-	public String userRegistration(@ModelAttribute UserRegistrationForm userRegistrationForm,
-			Model model) {
+	public String userRegistration(@Validated @ModelAttribute UserRegistrationForm userRegistrationForm,
+			BindingResult bindingResult,Model model) {
 		String password = userRegistrationForm.getPassword();
 		String passwordConfirmation = userRegistrationForm.getPasswordConfirmation();
 		String message = "";
+		if (bindingResult.hasErrors()) {
+			message = "登録に失敗しました";
+			model.addAttribute("message",message);
+			return "registration";
+		}
 		if (password.equals(passwordConfirmation)) {
 			userService.createUser(userRegistrationForm);
 			message = "登録に成功しました。";
 			model.addAttribute("message", message);
 			return "login";
 		} else {
-			message = "登録に失敗しました。";
+			message = "パスワードが一致しません。";
 			model.addAttribute("message", message);
 			return "registration";
 		}
@@ -150,10 +157,15 @@ public class PictweetController {
 	 * ログイン制御
 	 */
 	@PostMapping("userLogin")
-	public String userLogin(@ModelAttribute LoginForm loginForm,
-			Model model) {
+	public String userLogin(@Validated @ModelAttribute LoginForm loginForm,
+			BindingResult bindingResult,Model model) {
 		UserEntity loginUser = userService.loginUser(loginForm);
 		String message = "";
+		if(bindingResult.hasErrors()) {
+			message = "ログインIDとパスワードを入力してください";
+			model.addAttribute("message",message);
+			return "login";
+		}
 		if (loginUser != null) {
 			session.setAttribute("loginUser", loginUser);
 			model.addAttribute("loginUser", loginUser);

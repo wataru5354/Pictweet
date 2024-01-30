@@ -12,13 +12,13 @@
 				<span><img src="/arrow_top.png" alt="サンプル画像"></span>
 				<ul class="more_list">
 					<li>
-						<a th:href="@{show/{id}(id=${tweet.id})}">詳細</a>
+						<a th:href="@{/show/{id}(id=${tweet.id})}">詳細</a>
 					</li>
 					<li>
-						<a th:href="@{edit/{id}(id=${tweet.id})}">編集</a>
+						<a th:href="@{/edit/{id}(id=${tweet.id})}">編集</a>
 					</li>
 					<li>
-						<a th:href="@{delete/{id}(id=${tweet.id})}">削除</a>
+						<a th:href="@{/delete/{id}(id=${tweet.id})}">削除</a>
 					</li>
 				</ul>
 			</div>

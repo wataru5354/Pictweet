@@ -34,8 +34,11 @@ public class TweetServiceImpl implements TweetService {
 
 	//新規投稿メソッド
 	public void createTweet(TweetForm tweetForm, MultipartFile multipartFile) throws IOException {
+		//画像の登録処理
 		ImageEntity image = commonImage(multipartFile);
 		imageRepository.save(image);
+		
+		//新規投稿処理
 		TweetEntity tweet = new TweetEntity();
 		UserEntity tweetUser = userRepository.findByUserId(tweetForm.getUserId());
 		tweet.setTweet(tweetForm.getTweet());
@@ -54,6 +57,8 @@ public class TweetServiceImpl implements TweetService {
 	public void editTweet(TweetForm tweetForm, MultipartFile multipartFile) throws IOException {
 		TweetEntity editTweet = new TweetEntity();
 		UserEntity tweetUser = userRepository.findByUserId(tweetForm.getUserId());
+		
+		//画像更新処理
 		ImageEntity image = imageRepository.findByImageId(tweetForm.getImageId());
 		image =  commonImage(multipartFile);
 		image.setImageId(tweetForm.getImageId());
@@ -61,6 +66,8 @@ public class TweetServiceImpl implements TweetService {
 		image.setImageName(image.getImageName());
 		image.setType(image.getType());
 		imageRepository.save(image);
+		
+		//投稿内容更新処理
 		editTweet.setId(tweetForm.getId());
 		editTweet.setTweet(tweetForm.getTweet());
 		editTweet.setUser(tweetUser);
